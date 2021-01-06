@@ -13,7 +13,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
 	# implemented from micah's selfbot | cleardms (https://github.com/girl/owo/blob/master/owo.py)
-	if message.content == "melvinscat":
+	if message.content == "melvinscat" && message.author == client.user:
 		for channel in client.private_channels:
 			if isinstance(channel, discord.DMChannel):
 				async for msg in channel.history(limit=9999):
