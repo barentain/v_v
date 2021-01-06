@@ -1,5 +1,6 @@
 import discord
 import asyncio
+from time import localtime, strftime
 
 client = discord.Client()
 token = "" # insert your token here :D
@@ -13,27 +14,37 @@ async def on_ready():
 @client.event
 async def on_message(message):
 	# implemented from micah's selfbot | cleardms (https://github.com/girl/owo/blob/master/owo.py)
-	if message.content == "melvinscat" & message.author == client.user:
-		for channel in client.private_channels:
-			if isinstance(channel, discord.DMChannel):
-				async for msg in channel.history(limit=9999):
-					try:
-						if msg.author == client.user:
-							await msg.delete()
-							print(msg)
-					except:
-						pass
+	if message.content == "melvinscat":
+		if message.author == client.user:
+			for channel in client.private_channels:
+				if isinstance(channel, discord.DMChannel):
+					async for msg in channel.history(limit=9999):
+						try:
+							if msg.author == client.user:
+								await msg.delete()
+								print(msg)
+						except:
+							pass
 
 # react to one of your messages and it will delete all msgs in that channel
 @client.event
 async def on_raw_reaction_add(payload):
 	channel = await client.fetch_channel(payload.channel_id)
-	if isinstance(channel, discord.DMChannel):
+	timestamp = strftime("%Y-%m-%d %H:%M:%S", localtime())
+	if isinstance(channel, discord.TextChannel):
 		async for msg in channel.history(limit=99999):
 			if msg.author == client.user:
 				try:
 					await msg.delete()
-					print(f"[{msg.guild.name}/{msg.channel.name}] Deleting '{msg.id}' + '{msg.content}' sent by you")
+					print(f"[{timestamp}] Deleting '{msg.id}' + '{msg.content}'")
+				except:
+					pass
+	elif isinstance(channel, discord.DMChannel):
+		async for msg in channel.history(limit=99999):
+			if msg.author == client.user:
+				try:
+					await msg.delete()
+					print(f"[{timestamp}] Removed '{msg.content} ({msg.id})' sent by you")
 				except:
 					pass
 
