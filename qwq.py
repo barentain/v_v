@@ -26,7 +26,7 @@ async def on_message(message):
 						except:
 							pass
 
-# react to one of your messages and it will delete all msgs in that channel
+# react to one of your messages and it will delete all messages in that channel
 @client.event
 async def on_raw_reaction_add(payload):
 	channel = await client.fetch_channel(payload.channel_id)
