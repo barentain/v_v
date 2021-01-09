@@ -24,6 +24,11 @@ Linux:
 python3 qwq.py
 ```
 
+In order to delete your messages in a single channel, you must react to one of
+your messages with any emoji.
+
+For the cleardms feature, type in 'melvinscat' in any server/dm.
+
 
 ![This is a alt text.](https://wallpapercave.com/wp/wp2081246.jpg "ily <3")
 
