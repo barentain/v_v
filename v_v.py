@@ -52,7 +52,6 @@ async def save_msgs(message, filename, limit):
 	async for msg in message.channel.history(limit=limit):
 		try:
 			check_file(filename)
-			# time.sleep(0.01)
 			with open(filename, "a+", encoding="utf-8") as export_file:
 				export_file.write(f"{msg.created_at} - {msg.author.id} / {msg.id} <{msg.author}> {msg.content}\n")
 			print(f"{timestamp} - LOGGED - {msg.author.id} / {msg.id} <{msg.author}> {msg.content}")
