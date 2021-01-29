@@ -78,7 +78,8 @@ def check_file(file):
 @client.event
 async def on_raw_reaction_add(payload):
 	channel = await client.fetch_channel(payload.channel_id)
-	if payload.member == client.user:
+	author = await client.fetch_user(payload.user_id)
+	if author == client.user:
 		async for msg in channel.history(limit=99999):
 			if msg.author == client.user:
 				try:
